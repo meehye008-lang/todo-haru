@@ -10,35 +10,34 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #4a3200;
-  background: linear-gradient(135deg, #ffe45c 0%, #ffc531 50%, #ff9f1c 100%) fixed;
+  color: #d7e3ea;
+  background: #05070a;
 }
 
 h1 {
   margin: 8px 0 4px;
   font-size: 40px;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+  color: #00e5ff;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
 }
 
-/* 날짜 */
+/* 날짜: 숫자라서 고정폭 글꼴 */
 h1 + p {
   margin: 0 0 24px;
   text-align: center;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
   font-size: 14px;
-  color: rgba(74, 50, 0, 0.8);
+  color: #7f8f99;
 }
 
-/* 유리 카드: 입력줄, 안내/요약 문구, 할 일 한 줄 */
+/* 얇은 선으로 나눈 카드: 입력줄, 안내/요약 문구, 할 일 한 줄 */
 body > div,
 body > p,
 li {
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(150, 90, 0, 0.25);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
+  background: #0b0f14;
+  border: 1px solid #1f2a33;
+  border-radius: 12px;
 }
 
 body > div {
@@ -52,14 +51,12 @@ body > p {
   margin: 0 0 16px;
   padding: 14px 16px;
   text-align: center;
+  color: #7f8f99;
 }
 
 h1 + p {
   background: none;
   border: none;
-  box-shadow: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
   padding: 0;
   margin: 0 0 24px;
 }
@@ -70,20 +67,20 @@ input[type="text"] {
   min-height: 44px;
   padding: 0 14px;
   font-size: 16px;
-  color: #4a3200;
-  background: rgba(255, 255, 255, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
+  color: #d7e3ea;
+  background: #05070a;
+  border: 1px solid #1f2a33;
+  border-radius: 8px;
   outline: none;
 }
 
 input[type="text"]::placeholder {
-  color: rgba(74, 50, 0, 0.6);
+  color: #4b5963;
 }
 
 input[type="text"]:focus {
-  border-color: #c77700;
-  background: rgba(255, 255, 255, 0.6);
+  border-color: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.35);
 }
 
 button {
@@ -91,15 +88,21 @@ button {
   padding: 0 16px;
   font-size: 16px;
   font-weight: 600;
-  color: #4a3200;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
+  color: #d7e3ea;
+  background: transparent;
+  border: 1px solid #1f2a33;
+  border-radius: 8px;
   cursor: pointer;
 }
 
+/* 네온 빛 강조는 청록 하나만: 추가 버튼 */
+body > div button {
+  color: #00e5ff;
+  border-color: #00e5ff;
+}
+
 button:active {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(0, 229, 255, 0.15);
 }
 
 ul {
@@ -126,13 +129,15 @@ input[type="checkbox"] {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  accent-color: #e08900;
+  accent-color: #00e5ff;
 }
 
-/* 요약 문구는 목록 바로 아래 마지막 줄 */
+/* 요약 문구는 마지막 줄: 숫자라서 고정폭 글꼴 */
 body > p:last-child {
   margin-bottom: 0;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
   font-size: 14px;
+  color: #00e5ff;
 }
 
 /* 아주 좁은 폰 */
