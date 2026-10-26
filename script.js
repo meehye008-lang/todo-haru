@@ -1,6 +1,6 @@
 // 명세 ③: 추가 → 목록 맨 아래에 · 체크 → 줄이 그어지고 남은 개수 −1 · 삭제 → 목록에서 사라짐
 // 완료 조건: 빈 칸은 추가 안 됨 · 체크하면 남은 개수가 바로 바뀜 · 새로고침해도 남음 · 휴대폰에서 쓸 수 있음
-// 할 일은 Supabase의 todos 표에 저장한다 (칸: id, text, done, created_at)
+// 할 일은 Supabase의 todos 표에 저장한다 (칸: id, text, done, created_at, detail, due_date)
 
 const SUPABASE_URL = 'https://avncnqggyxjhatzfahko.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_TYQXb62GkBxIvOiP4CQQtQ_QW9WD4L-';  // 공개 키만 쓴다
@@ -9,7 +9,8 @@ const TABLE_URL = SUPABASE_URL + '/rest/v1/todos';
 // todos 표에는 별표 칸이 없어서, 별표는 이 브라우저에 id만 따로 저장한다
 const STAR_KEY = 'todo-stars';
 
-let items = [];  // [{ id, text, done, created_at }, ...] 오래된 것부터
+let items = [];  // [{ id, text, done, created_at, detail, due_date }, ...] 오래된 것부터
+const opened = new Set();  // 세부사항 칸이 펼쳐진 할 일의 id (화면에서만 기억)
 
 function loadStars() {
   try {
@@ -41,9 +42,9 @@ async function request(query, options) {
   return response.status === 204 ? null : response.json();
 }
 
-function showError(error) {
+function showError(error, message) {
   console.error(error);
-  alert('표에 저장하지 못했어요. 인터넷과 Supabase 설정(표 권한)을 확인해 주세요.');
+  alert(message || '표에 저장하지 못했어요. 인터넷과 Supabase 설정(표 권한)을 확인해 주세요.');
 }
 
 async function loadItems() {
@@ -95,6 +96,34 @@ async function removeItem(item) {
   render();
 }
 
+// 세부사항과 마감 날짜를 표에 저장한다 (비워 두면 지워진다)
+async function saveDetail(item, detail, dueDate) {
+  try {
+    await request('?id=eq.' + encodeURIComponent(item.id), {
+      method: 'PATCH',
+      body: JSON.stringify({ detail: detail.trim() || null, due_date: dueDate || null }),
+    });
+    item.detail = detail.trim() || null;
+    item.due_date = dueDate || null;
+    opened.delete(item.id);
+  } catch (error) {
+    showError(error, '세부사항·마감 날짜를 저장하지 못했어요. todos 표에 detail, due_date 칸이 있는지 확인해 주세요.');
+  }
+  render();
+}
+
+function toggleOpen(item) {
+  if (opened.has(item.id)) opened.delete(item.id);
+  else opened.add(item.id);
+  render();
+}
+
+// '2026-10-30' → '10월 30일'
+function formatDue(dueDate) {
+  const [, month, day] = dueDate.split('-');
+  return Number(month) + '월 ' + Number(day) + '일';
+}
+
 function toggleStar(item) {
   const stars = loadStars();
   const id = String(item.id);
@@ -126,6 +155,23 @@ function render() {
 
     const label = document.createElement('span');
     label.textContent = item.text;
+    label.className = 'label';
+    label.tabIndex = 0;
+    label.setAttribute('role', 'button');
+    label.setAttribute('aria-expanded', opened.has(item.id) ? 'true' : 'false');
+    label.addEventListener('click', () => toggleOpen(item));
+    label.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleOpen(item);
+      }
+    });
+    if (item.due_date) {
+      const due = document.createElement('small');
+      due.className = 'due';
+      due.textContent = '마감 ' + formatDue(item.due_date);
+      label.append(due);
+    }
 
     const star = document.createElement('button');
     star.type = 'button';
@@ -141,6 +187,32 @@ function render() {
     del.addEventListener('click', () => removeItem(item));
 
     li.append(check, label, star, del);
+
+    // 글자를 누르면 아래로 펼쳐지는 세부사항·마감 날짜 칸
+    if (opened.has(item.id)) {
+      const panel = document.createElement('div');
+      panel.className = 'detail';
+
+      const detailInput = document.createElement('input');
+      detailInput.type = 'text';
+      detailInput.placeholder = '세부사항';
+      detailInput.value = item.detail || '';
+      detailInput.setAttribute('aria-label', '세부사항');
+
+      const dueInput = document.createElement('input');
+      dueInput.type = 'date';
+      dueInput.value = item.due_date || '';
+      dueInput.setAttribute('aria-label', '마감 날짜');
+
+      const saveButton = document.createElement('button');
+      saveButton.type = 'button';
+      saveButton.textContent = '저장';
+      saveButton.addEventListener('click', () => saveDetail(item, detailInput.value, dueInput.value));
+
+      panel.append(detailInput, dueInput, saveButton);
+      li.append(panel);
+    }
+
     list.append(li);
   });
   // 남은 개수 = 체크하지 않은 것

@@ -80,3 +80,39 @@ li.done { text-decoration: line-through; color: #9ca3af; }
   margin: 0 auto 8px;
   border-radius: 16px;
 }
+
+/* 할 일 글자를 누르면 펼쳐지는 세부사항·마감 날짜 칸 */
+#list li { flex-wrap: wrap; }
+
+#list li .label { cursor: pointer; }
+
+#list li .due {
+  display: block;
+  font-size: 13px;
+  color: #0f766e;
+}
+
+#list li .detail {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
+#list li .detail input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #99c9c4;
+  border-radius: 8px;
+}
+
+#list li .detail button {
+  margin-left: 0;
+  padding: 12px 20px;
+  color: #ffffff;
+  background: #0f766e;
+  border: none;
+}
