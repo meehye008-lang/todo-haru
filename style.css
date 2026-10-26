@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 480px;
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #fff;
+  background: linear-gradient(135deg, #5b6cff 0%, #b455e8 50%, #ff7eb3 100%) fixed;
+}
+
+h1 {
+  margin: 8px 0 4px;
+  font-size: 28px;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 날짜 */
+h1 + p {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 유리 카드: 입력줄, 안내/요약 문구, 할 일 한 줄 */
+body > div,
+body > p,
+li {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(31, 38, 135, 0.25);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+body > div {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+body > p {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+h1 + p {
+  background: none;
+  border: none;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  outline: none;
+}
+
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+input[type="text"]:focus {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+button {
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button:active {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+ul {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+li span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  accent-color: #ff7eb3;
+}
+
+/* 요약 문구는 목록 바로 아래 마지막 줄 */
+body > p:last-child {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+/* 아주 좁은 폰 */
+@media (max-width: 360px) {
+  body {
+    padding: 16px 12px 32px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
