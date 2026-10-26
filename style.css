@@ -101,6 +101,20 @@ body > div button {
   border-color: #00e5ff;
 }
 
+button {
+  transition: background 0.15s, border-color 0.15s;
+}
+
+button:hover {
+  background: rgba(0, 229, 255, 0.08);
+  border-color: #3a4c58;
+}
+
+body > div button:hover {
+  border-color: #00e5ff;
+  background: rgba(0, 229, 255, 0.12);
+}
+
 button:active {
   background: rgba(0, 229, 255, 0.15);
 }
