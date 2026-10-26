@@ -10,15 +10,15 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: #fff;
-  background: linear-gradient(135deg, #5b6cff 0%, #b455e8 50%, #ff7eb3 100%) fixed;
+  color: #4a3200;
+  background: linear-gradient(135deg, #ffe45c 0%, #ffc531 50%, #ff9f1c 100%) fixed;
 }
 
 h1 {
   margin: 8px 0 4px;
   font-size: 28px;
   text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
 }
 
 /* 날짜 */
@@ -26,17 +26,17 @@ h1 + p {
   margin: 0 0 24px;
   text-align: center;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(74, 50, 0, 0.8);
 }
 
 /* 유리 카드: 입력줄, 안내/요약 문구, 할 일 한 줄 */
 body > div,
 body > p,
 li {
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(31, 38, 135, 0.25);
+  box-shadow: 0 8px 24px rgba(150, 90, 0, 0.25);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
@@ -70,20 +70,20 @@ input[type="text"] {
   min-height: 44px;
   padding: 0 14px;
   font-size: 16px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #4a3200;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 12px;
   outline: none;
 }
 
 input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(74, 50, 0, 0.6);
 }
 
 input[type="text"]:focus {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.28);
+  border-color: #c77700;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 button {
@@ -91,15 +91,15 @@ button {
   padding: 0 16px;
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #4a3200;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 12px;
   cursor: pointer;
 }
 
 button:active {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.75);
 }
 
 ul {
@@ -126,7 +126,7 @@ input[type="checkbox"] {
   width: 24px;
   height: 24px;
   flex-shrink: 0;
-  accent-color: #ff7eb3;
+  accent-color: #e08900;
 }
 
 /* 요약 문구는 목록 바로 아래 마지막 줄 */
