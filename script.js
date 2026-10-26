@@ -9,7 +9,7 @@ function save() {
 }
 
 function addItem(text) {
-  items.push({ text: text, done: false });  // 목록 맨 아래에
+  items.push({ text: text, done: false, star: false });  // 목록 맨 아래에
   save();
   render();
 }
@@ -17,7 +17,12 @@ function addItem(text) {
 function render() {
   const list = document.querySelector('#list');
   list.innerHTML = '';
-  items.forEach((item, i) => {
+  // 별표 한 일을 맨 위로: 보이는 순서만 바꾸고, 저장된 순서(items)는 그대로 둔다
+  const order = items.map((item, i) => i);
+  order.sort((a, b) => Number(!!items[b].star) - Number(!!items[a].star) || a - b);
+
+  order.forEach((i) => {
+    const item = items[i];
     const li = document.createElement('li');
     if (item.done) li.classList.add('done');
 
@@ -33,6 +38,18 @@ function render() {
     const label = document.createElement('span');
     label.textContent = item.text;
 
+    const star = document.createElement('button');
+    star.type = 'button';
+    star.className = item.star ? 'star on' : 'star';
+    star.textContent = item.star ? '★' : '☆';
+    star.setAttribute('aria-label', '중요 표시');
+    star.setAttribute('aria-pressed', item.star ? 'true' : 'false');
+    star.addEventListener('click', () => {
+      items[i].star = !items[i].star;
+      save();
+      render();
+    });
+
     const del = document.createElement('button');
     del.type = 'button';
     del.textContent = '삭제';
@@ -42,7 +59,7 @@ function render() {
       render();
     });
 
-    li.append(check, label, del);
+    li.append(check, label, star, del);
     list.append(li);
   });
   // 남은 개수 = 체크하지 않은 것

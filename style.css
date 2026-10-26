@@ -52,3 +52,18 @@ button { padding: 12px 20px; border-radius: 8px; }
 #list input[type="checkbox"] { width: 22px; height: 22px; }
 
 li.done { text-decoration: line-through; color: #9ca3af; }
+
+/* 별표 버튼: 꺼져 있으면 회색, 누르면 노란색 */
+#list li span { flex: 1; }
+
+#list li button.star {
+  margin-left: 0;
+  padding: 4px 8px;
+  font-size: 22px;
+  line-height: 1;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+}
+
+#list li button.star.on { color: #facc15; }
