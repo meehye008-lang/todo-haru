@@ -69,7 +69,7 @@ li.done { text-decoration: line-through; color: #9ca3af; }
 #list li button.star.on { color: #facc15; }
 
 /* 오늘 날짜 */
-#today { margin: -8px 0 16px; color: #6b7280; }
+#today { margin: 0 0 16px; color: #6b7280; }
 
 /* 제목 위 로고: 휴대폰 폭에 맞게 줄이고 모서리는 둥글게 */
 #logo {
