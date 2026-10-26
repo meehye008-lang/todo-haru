@@ -162,5 +162,13 @@ document.querySelector('#item').addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && !event.isComposing) button.click();
 });
 
+// 제목 아래에 오늘 날짜를 보여 준다 (예: 2026년 10월 26일 월요일)
+document.querySelector('#today').textContent = new Date().toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'long',
+});
+
 render();
 loadItems();
